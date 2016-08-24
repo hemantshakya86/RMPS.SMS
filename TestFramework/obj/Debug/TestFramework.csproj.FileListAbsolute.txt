@@ -1,0 +1,12 @@
+D:\Hemant\RMPS.SMS\TestFramework\bin\Debug\TestFramework.dll
+D:\Hemant\RMPS.SMS\TestFramework\bin\Debug\TestFramework.pdb
+D:\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.dll
+D:\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.pdb
+D:\Hemant\RMPS.SMS\TestFramework\bin\Debug\System.ComponentModel.Primitives.dll
+D:\Hemant\RMPS.SMS\TestFramework\bin\Debug\System.ComponentModel.Primitives.xml
+D:\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.csprojResolveAssemblyReference.cache
+D:\Hemant\Hemant\RMPS.SMS\TestFramework\bin\Debug\TestFramework.dll
+D:\Hemant\Hemant\RMPS.SMS\TestFramework\bin\Debug\TestFramework.pdb
+D:\Hemant\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.dll
+D:\Hemant\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.pdb
+D:\Hemant\Hemant\RMPS.SMS\TestFramework\obj\Debug\TestFramework.csprojResolveAssemblyReference.cache

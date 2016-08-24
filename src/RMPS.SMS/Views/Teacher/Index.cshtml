@@ -1,0 +1,130 @@
+﻿@using Framework.Configuration
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Teacher</h2>
+
+<div class="row">
+    <!-- TASKS -->
+    <div class="col-sm-12">
+        <div class="bg-white p-20 b-bot-2px-gray-light m-t-10">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="tab-content" >
+
+                        <!-- Users Tab Starts-->
+                        <div class="tab-pane active" id="teacher-detail">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @*<h3>Student</h3>*@
+                                    <hr>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("CreateEditTeacher", "Teacher")" class="btn btn-primary">Add Teacher</a>
+                                        <div class="btn btn-alt">
+                                            <i class="fi-plus text-white"></i>
+                                        </div>
+                                    </div>
+                                    <table class="w-100 m-t-10">
+                                        <tr>
+                                            <td class="vAlign">
+                                                <div class="">
+                                                    <input type="text" class="input-large input-light brad" placeholder="First Name" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: firstName">
+                                                    <input type="text" class="input-large input-light brad" placeholder="Last Name" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: lastName">
+                                                    <input type="text" class="input-large input-light brad m-r-10" placeholder="Email" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: standard">
+                                                    <div class="btn-group m-b-10">
+                                                        <button type="button" class="btn btn-primary" data-bind="click: getSearchResults">Filter</button>
+                                                        <div class="btn btn-alt">
+                                                            <i class="fa fa-search text-white"></i>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-blue m-b-10" data-bind="click: resetUser">Reset</button>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-bordered m-t-10 table-l-a td-ellipsis">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-c-a">First Name</th>
+                                                <th class="table-c-a">Last Name</th>
+                                                <th class="table-c-a">Email ID</th>
+                                                <th class="input-w-80 table-c-a">Edit</th>
+                                                @*<th class="table-c-a">Remove</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody style="display: none;" data-bind="foreach: Items, visible: Items().length > 0, visible: !loading()">
+                                            <tr>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: FirstName"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: LastName"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: Email"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <a class="editTeacher" data-bind="attr: { href: '/teacher/editTeacher/' + ID() }"><i class="fi-pencil"></i></a>
+                                                </td>
+                                                @*<td>
+                                    <a data-bind="attr: { href: '/Users/deleteuser/' + ID() }" class="deleteUser" data-fancybox-type="iframe"><i class="fi-x"></i></a>
+                                </td>*@
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="display: none;" data-bind="visible: !loading() && Items().length == 0">
+                                                <td colspan="4" class="table-c-a">
+                                                    No record found!
+                                                </td>
+                                            </tr>
+                                            <tr data-bind="visible: loading">
+                                                <td colspan="4" class="table-c-a">
+                                                    <div class="tb-loader">
+                                                        <img src="~/assets/img/loading.gif" alt="" width="50" height="50" />
+                                                        <div class="m-t-5">Loading...</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @*<tr class="more-bg">
+                                <td colspan="5">
+                                    <a href="" data-bind="click: getMore, visible: MoreAvailable">
+                                        <i class="fa fa-plus"></i>
+                                        More
+                                    </a>
+                                </td>
+                            </tr>*@
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+
+        var getTeacherUrl = "@ConfigManager.Application.BuildApiUrl("teacher/search?firstname={0}&lastname={1}&email={2}&sortBy={3}&sortDirection={4}")";
+
+    </script>
+    <script src="~/assets/views/Teacher/Teacher.js"></script>
+}

@@ -1,0 +1,164 @@
+﻿@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Student</h2>
+
+<div class="row">
+    <!-- TASKS -->
+    <div class="col-sm-12">
+        <div class="bg-white p-20 b-bot-2px-gray-light m-t-10">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Nav tabs -->
+                    @*<ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#index" role="tab" data-toggle="tab">Student</a></li>
+                        @*<li><a href="#user-groups" role="tab" data-toggle="tab">User Groups</a></li>*@
+                    @*@<li><a href="#roles" role="tab" data-toggle="tab">Roles</a></li>
+                        </ul>*@
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <!-- Users Tab Starts-->
+                        <div class="tab-pane active" id="users">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @*<h3>Student</h3>*@
+                                    <hr>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("CreateEditStudent", "Student")" class="btn btn-primary">Add Student</a>
+                                        <div class="btn btn-alt">
+                                            <i class="fi-plus text-white"></i>
+                                        </div>
+                                    </div>
+                                    <table class="w-100 m-t-10">
+                                        <tr>
+                                            <td class="vAlign">
+                                                <div class="">
+                                                    <input type="text" class="input-large input-light brad" placeholder="First Name" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: firstName">
+                                                    <input type="text" class="input-large input-light brad" placeholder="Last Name" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: lastName">
+                                                    <input type="text" class="input-large input-light brad m-r-10" placeholder="Standard" maxlength="30" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: standard">
+                                                    <div class="btn-group m-b-10">
+                                                        <button type="button" class="btn btn-primary" data-bind="click: getSearchResults">Filter</button>
+                                                        <div class="btn btn-alt">
+                                                            <i class="fa fa-search text-white"></i>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-blue m-b-10" data-bind="click: resetUser">Reset</button>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-bordered m-t-10 table-l-a td-ellipsis">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-c-a">First Name</th>
+                                                <th class="table-c-a">Last Name</th>
+                                                <th class="table-c-a">Email ID</th>
+                                                <th class="input-w-80 table-c-a">Edit</th>
+                                                @*<th class="table-c-a">Remove</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody style="display: none;" data-bind="foreach: Items(), visible: Items().length > 0, visible: !loading()">
+                                            <tr>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: FirstName"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: LastName"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <div data-bind="text: Email"></div>
+                                                </td>
+                                                <td class="table-c-a">
+                                                    <a class="editStudent" data-bind="attr: { href: '/student/editStudent/' + ID() }"><i class="fi-pencil"></i></a>
+                                                </td>
+                                                <td>
+                                                    <a data-bind="attr: { href: '/SessionStudent/createsessionstudent/' + ID() }" class="set-session" data-fancybox-type="iframe">Set Session</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="display: none;" data-bind="visible: !loading() && Items().length == 0">
+                                                <td colspan="4" class="table-c-a">
+                                                    No record found!
+                                                </td>
+                                            </tr>
+                                            <tr data-bind="visible: loading">
+                                                <td colspan="4" class="table-c-a">
+                                                    <div class="tb-loader">
+                                                        <img src="~/assets/img/loading.gif" alt="" width="50" height="50" />
+                                                        <div class="m-t-5">Loading...</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @*<tr class="more-bg">
+                                                    <td colspan="5">
+                                                        <a href="" data-bind="click: getMore, visible: MoreAvailable">
+                                                            <i class="fa fa-plus"></i>
+                                                            More
+                                                        </a>
+                                                    </td>
+                                                </tr>*@
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var getUserUrl = "/api/student/search?firstname={0}&lastname={1}&email={2}&sortBy={3}&sortDirection={4}";
+        $(document).ready(function () {
+            //$('.addStudent').fancybox({
+            //    maxWidth: 1000,
+            //    maxHeight: 1000,
+            //    fitToView: false,
+            //    width: '900px',
+            //    height: '600px',
+            //    autoSize: false,
+            //    closeClick: false,
+            //    openEffect: 'none',
+            //    closeEffect: 'none',
+            //    padding: 0,
+            //    closeBtn: false,
+            //});
+            $('.set-session').fancybox({
+                maxWidth: 1000,
+                maxHeight: 1000,
+                fitToView: false,
+                width: '400px',
+                height: '250px',
+                autoSize: false,
+                closeClick: false,
+                openEffect: 'none',
+                closeEffect: 'none',
+                padding: 0,
+                closeBtn: false,
+            });
+        });
+
+    </script>
+    <script src="~/assets/views/Student/Student.js"></script>
+}

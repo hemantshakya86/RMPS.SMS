@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SMS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/assets/css/admin.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/libs/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/assets/libs/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/assets/libs/jquery.selectBoxIt/src/stylesheets/jquery.selectBoxIt.css" rel="stylesheet" />
+    <link href="~/assets/libs/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/assets/css/async-upload.min.css" rel="stylesheet" />
+    <link href="~/assets/libs/selectize/dist/css/selectize.css" rel="stylesheet" />
+    <link href="~/assets/css/jquery.jcrop.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="dashboard-page" class="bg-gray-light">
+    <nav class="navbar navbar-fixed-top not-collapse bg-g-ln-gray" role="navigation">
+        <div class="navbar-header"></div>
+
+        <div id="top-nav">
+            <div class="navbar-dropdown navbar-right navbar-avatar m-t-12">
+                <a href="#" data-target="#topavatar-toggle" class="hover-no-underline dropdown-toggle m-lr-30 mm-lr-10" data-toggle="dropdown">
+                    @*<img src="~/assets/img/avatar.jpg" class="img-circle" width="25">*@
+                    <img id="user-image" data-bind="attr: { src: imageUrl }" class="img-circle" width="25">
+                    <span id="current-user-name" class="text-gray-light hidden-sm hidden-xs" data-bind=""></span>
+                    <span class="caret text-gray-light hidden-sm hidden-xs"></span>
+                </a>
+                <ul id="topavatar-toggle" class="dropdown-menu avatar-dropdown">
+
+
+                    <li><a href="#">My Account</a></li>
+
+
+                    <li><a href="#">My Account</a></li>
+
+
+                    <li><a href="#" data-fancybox-type="iframe" class="changePassword">Change Password</a></li>
+                    <li><a href="#">Sign out</a></li>
+                </ul>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right m-r-20" id="unread-messages">
+                <li>
+
+                    <a href="#">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        <span class="text-white circle-12px bg-orange text-small text-center icon-counter" data-bind="visible: TotalUnreadMessage() > 0, text: TotalUnreadMessage"></span>
+                        <span class="hidden-sm hidden-xs">Messages</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidebar bg-gray-dark text-white text-center pushy pushy-left">
+        <div>
+            <img src="~/assets/img/logo.png" />
+        </div>
+        <ul id="avatar-toggle" class="dropdown-sidebar-avatar" role="menu" aria-labelledby="dLabel">
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Sign out</a></li>
+        </ul>
+
+        <hr class="no-margin">
+
+        <ul class="unstyled nav">
+
+            <!--Admin Dashboard-->
+            <li class="">
+                <a href="#" class="text-left">Dashboard</a>
+            </li>
+            <li class="">
+                <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
+                    Administrations
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" id="dropDown2" role="menu">
+                    <li id="userAdministration" class="">
+                        <a href="@Url.Action("Index", "UserAdministration")" class="text-left">User Administration</a>
+                    </li>
+                    <li id="classRoom" class="">
+                        <a asp-area="" asp-controller="ClassRooms" asp-action="Index">Class Rooms</a>
+
+                    </li>
+                    <li id="sessions" class="">
+                        <a asp-area="" asp-controller="Sessions" asp-action="Index">Sessions</a>
+
+                    </li>
+                    <li id="courses" class="">
+                        <a asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+
+                    </li>
+                    <li id="roomSession" class="">
+                        <a asp-area="" asp-controller="RoomSessions" asp-action="Index">Room Sessions</a>
+
+                    </li>
+                </ul>
+
+            </li>
+            <li class="">
+                <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
+                    Student
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" id="dropDown3" role="menu">
+
+                    <li id="student" class="">
+                        <a asp-area="" asp-controller="Student" asp-action="Index">Student</a>
+
+                        
+                    </li>
+                    <li id="sessionStudent" class="">
+                        <a asp-area="" asp-controller="SessionStudent" asp-action="Index">Session Student</a>
+                        
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
+                    Teacher
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" id="dropDown4" role="menu">
+                    <li id="teacher" class="">
+                        <a asp-area="" asp-controller="Teacher" asp-action="Index">Teacher</a>
+                        
+                    </li>
+
+                </ul>
+
+            </li>
+        </ul>
+
+    </div>
+
+    @*<div class="preloader">
+            <div class="timer"></div>
+        </div>*@
+
+    <div id="container" class="main-content p-15 tp-t-60 tp-lr-10 p-t-30 active">
+
+        <button class="menu-btn btn btn-bordered text-gray-alt text-bold top-left-corner">&#9776; MENU</button>
+
+        <!-- DASHBOARD TAB -->
+        @*@RenderSection("DashboardTab")*@
+
+        <div class="tab-content bg-white b-1px-gray-light b-top-none brad-bottom brad-tr b-bot-2px-gray-light">
+            <div class="tab-pane active" id="dashboard">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="bg-white p-20 b-bot-2px-gray-light b-right-1px-gray-light min-h-395">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("~/Views/Shared/_Footer.cshtml")
+
+    </div>
+    <!-- /main content -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
+    <script src="~/assets/libs/jquery/dist/jquery.js"></script>
+    <script src="~/assets/libs/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/assets/libs/underscore/underscore.js"></script>
+    <script src="~/assets/libs/jquery.selectBoxIt/src/javascripts/jquery.selectBoxIt.js"></script>
+    <script src="~/assets/libs/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/assets/libs/fancybox/source/jquery.fancybox.js"></script>
+    <script src="~/assets/libs/knockout/dist/knockout.min.js"></script>
+    <script src="~/assets/libs/knockout-mapping/knockout.mapping.js"></script>
+    <script src="~/assets/libs/Knockout-Validation/Dist/knockout.validation.js"></script>
+    <script src="~/assets/libs/jquery.maskedinput/dist/jquery.maskedinput.js"></script>
+    <script src="~/assets/js/jquery.jcrop.js"></script>
+    <script src="~/assets/js/jquery.jcrop.extensions.js"></script>
+    <script src="~/assets/js/bootstrap-select.js"></script>
+    <script src="~/assets/js/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="~/assets/libs/selectize/dist/js/standalone/selectize.js"></script>
+    <script src="~/assets/js/notify.js"></script>
+    <script src="~/assets/js/async-upload.min.js"></script>
+    <script src="~/js/models.js"></script>
+    <script src="~/assets/js/framework.js"></script>
+    <script src="~/assets/js/site.js"></script>
+    @*<script src="~/assets/views/account/layout.js"></script>*@
+    <script src="~/assets/js/moment.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

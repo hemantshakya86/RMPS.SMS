@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "DeleteRoomSession";
+    Layout = "~/Views/Shared/_ChildLayout.cshtml";
+}
+
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Newtonsoft.Json
+@model int?
+
+
+<div class="delete-roomsessions" id="deleteRoomSessions">
+    <div class="modal-header">
+        <button type="button" class="close" onclick=" parent.jQuery.fancybox.close(); "><span><i class="fi-x-circle m-10 text-large"></i></span></button>
+        <h4 class="modal-title">Delete Room Session</h4>
+    </div>
+
+    <div class="modal-body">
+        <p>Are you sure you want to delete this Room Session?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-blue button-w-80" onclick="DeleteRoomSession()">Submit</button>
+        <button class="btn btn-default button-style button-w-80" onclick=" parent.jQuery.fancybox.close(); ">
+            Cancel
+        </button>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        var id = '@(Model.HasValue ? Model.Value.ToString():"")';
+        function DeleteRoomSession() {
+            var deleteRequest = new Framework.AjaxRequestInfo("/api/roomsessions/delete/"+id, function () {
+                parent.notify.success('Room Session Deleted Successfully');
+                parent.refreshRoomSessions();
+            });
+            Framework.AjaxManager.remove(deleteRequest);
+        }
+        //$(function () {
+        //    Framework.DataBinder.applyBinding(model, "deleteRoomSessions");
+        //});
+
+    </script>
+}

@@ -1,0 +1,392 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using RMPS.SMS.Models
+@{
+    ViewBag.Title = "CreateEditStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>CreateEditStudent</h2>*@
+@model int?
+<div class="clearfix">
+    <div class="modal-header">
+        @*<button type="button" class="close" onclick="parent.jQuery.fancybox.close();"><span><i class="fi-x-circle m-10 text-large"></i></span></button>*@
+        @if (Model == null)
+        {
+            <h4 class="modal-title">
+                New Student Details
+            </h4>
+        }
+        else
+        {
+            <h4 class="modal-title">Edit Student Details</h4>
+        }
+
+    </div>
+    <div class="modal-body clearfix" id="studentDetail">
+        <ul class="nav nav-tabs" id="createUsertab" role="tablist">
+            <li id="userDetail" class="active">
+                <a href="#addUser" role="tab" data-toggle="tab">User Detail</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="clearfix m-t-20">
+                    <div class="pull-left">
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">First Name</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="1" placeholder="First Name" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: FirstName, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Father Name</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="5" placeholder="Father Name" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: FatherName, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Father Qualification</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+
+                                    <select id="" class="form-control m-b-10" maxlength="100" tabindex="7" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: FatherQualification, bTooltip: { placement: 'top' }" maxlength="30">
+                                        <option value="">Please select</option>
+                                        <option name="Nill">Nill</option>
+                                        <option name="X">X</option>
+                                        <option name="XII">XII</option>
+                                        <option name="Graduate">Graduate</option>
+                                        <option name="Post Graduate">Post Graduate</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Contact No.</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input id="phone" type="text" class="form-control m-b-10" tabindex="9" placeholder="Contact No." data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Phone, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Gender</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td>
+                                    <span style="margin-left: 30px">
+                                        Male <input type="radio" name="Gender" checked="checked" value="@GenderType.Male" data-bind="checked:Gender" />
+                                    </span>
+                                    <span>
+                                        Female <input type="radio" name="Gender" value="@GenderType.Female" tabindex="11" data-bind="checked:Gender" />
+                                    </span>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Category</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <select id="" class="form-control m-b-10" placeholder="Category" tabindex="15" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Category, bTooltip: { placement: 'top' }" maxlength="30">
+                                        <option value="">Please select</option>
+                                        <option name="General">General</option>
+                                        <option name="OBC">OBC</option>
+                                        <option name="SC">SC</option>
+                                        <option name="ST">ST</option>
+                                        <option name="Others">Others</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Cast</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" placeholder="Cast" tabindex="17" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Cast, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Religion</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <select class="form-control m-b-10" placeholder="Religion" tabindex="19" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Religion, bTooltip: { placement: 'top' }" maxlength="30">
+                                        <option value="">Please select</option>
+                                        <option name="Hindu">Hindu</option>
+                                        <option name="Muslim">Muslim</option>
+                                        <option name="Christian">Christian</option>
+                                        <option name="Sikh">Sikh</option>
+                                        <option name="Others">Others</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                    <div class="pull-right clearfix">
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Last Name</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="2" placeholder="Last Name" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LastName, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Date of Birth</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+
+                                    @*<input type="text" class="form-control m-b-10" maxlength="100" size="20" tabindex="4" placeholder="Date of Birth" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: DateOfBirth, bTooltip: { placement: 'top' }">*@
+                                    <input type="text" class="form-control" placeholder="Date of Birth" data-bind="datePicker: {on: DateOfBirth,dateFormat: 'mm/dd/yy',changeYear: true,changeMonth: true,}, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Mother Name</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="6" placeholder="Mother Name" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: MotherName, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Mother Qualification</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+
+                                    <select type="text" class="form-control m-b-10" maxlength="100" tabindex="8" placeholder="Mother Qualification" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: MotherQualification, bTooltip: { placement: 'top' }">
+                                        <option value="">Please select</option>
+                                        <option name="Nill">Nill</option>
+                                        <option name="X">X</option>
+                                        <option name="XII">XII</option>
+                                        <option name="Graduate">Graduate</option>
+                                        <option name="Post Graduate">Post Graduate</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Father Occupation</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" tabindex="10" placeholder="Father Occupation" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: FatherOccupation, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Email</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                @if (Model == null)
+                                {
+                                    <td class="vAlign">
+                                        <input type="email" class="form-control m-b-10" placeholder="Email" tabindex="12" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Email, bTooltip: { placement: 'top' }" maxlength="30">
+
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="vAlign">
+                                        <input type="email" class="form-control m-b-10" placeholder="Email" tabindex="12" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: Email, bTooltip: { placement: 'top' }" maxlength="30">
+                                    </td>
+                                }
+                            </tr>
+
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Date of Joining</label>
+                                </td>
+                                <td class="vAlign">
+                                    @*<input type="text" id="" class="form-control m-b-10" placeholder="Date of Joining" size="14" tabindex="10" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: DateOfJoining">*@
+                                    <input type="text" class="form-control" placeholder="Date of Joining" data-bind="datePicker: {on: DateOfJoining,dateFormat: 'mm/dd/yy',changeYear: true,changeMonth: true,}, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Date of Leaving</label>
+                                </td>
+                                <td class="vAlign">
+                                    @*<input type="text" id="" class="form-control m-b-10" placeholder="Date of Leaving" size="14" tabindex="10" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: DateOfLeaving">*@
+                                    <input type="text" class="form-control" placeholder="Date of Leaving" data-bind="datePicker: {on: DateOfLeaving,dateFormat: 'mm/dd/yy',changeYear: true,changeMonth: true,}, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left">
+                        <h4 align="center">Local Address</h4>
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">House Number</label>
+                                    <span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" placeholder="House Number" tabindex="21" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().HouseNumber, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Street</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="22" placeholder="Street" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().Street, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">City</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="23" placeholder="City" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().City, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">State</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <select class="form-control m-b-10" placeholder="State" tabindex="24" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().State, bTooltip: { placement: 'top' }" maxlength="30">
+                                        <option value="">Please select</option>
+                                        <option name="Delhi">Delhi</option>
+                                        <option name="Mumbai">Mumbai</option>
+                                        <option name="Chennai">Chennai</option>
+                                        <option name="UP">UP</option>
+                                        <option name="Punjab">Punjab</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Postal Code</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="6" tabindex="25" placeholder="Postal Code" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().ZipCode, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Land Mark</label>
+                                    @*<span class="redColor m-r-10">*</span>*@
+                                </td>
+                                <td class="vAlign">
+                                    <textarea type="text" class="form-control m-b-10" placeholder="Land Mark" tabindex="26" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: LocalAddress().LandMark, bTooltip: { placement: 'top' }" maxlength="500"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="pull-right clearfix">
+                        <h4 align="center">Permanent Address</h4>
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">House Number</label>
+                                    <span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" placeholder="House Number" tabindex="28" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().HouseNumber, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Street</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="29" placeholder="Street" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().Street, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">City</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="100" tabindex="30" placeholder="City" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().City, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">State</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <select class="form-control m-b-10" placeholder="State" tabindex="31" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().State, bTooltip: { placement: 'top' }" maxlength="30">
+                                        <option value="">Please select</option>
+                                        <option name="Delhi">Delhi</option>
+                                        <option name="Mumbai">Mumbai</option>
+                                        <option name="Chennai">Chennai</option>
+                                        <option name="UP">UP</option>
+                                        <option name="Punjab">Punjab</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-t-7 p-r-5">Postal Code</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10" maxlength="6" tabindex="32" placeholder="Postal Code" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().ZipCode, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Land Mark</label>
+                                    @*<span class="redColor m-r-10">*</span>*@
+                                </td>
+                                <td class="vAlign">
+                                    <textarea type="text" class="form-control m-b-10" placeholder="Land Mark" tabindex="33" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: PermanentAddress().LandMark, bTooltip: { placement: 'top' }" maxlength="500"></textarea>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            @if (Model == null)
+            {
+                <button type="button" class="btn btn-blue button-w-100" tabindex="34" data-bind="ajaxSubmit: post, validationLog: true">Save</button>
+            }
+            else
+            {
+                <button class="btn btn-blue button-w-100" tabindex="34" data-bind="ajaxSubmit: put">Update</button>
+            }
+            <button type="button" class="btn btn-default m-r-10 button-style button-w-100" tabindex="35" onclick=" parent.jQuery.fancybox.close(); ">Cancel</button>
+            
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var id = '@(Model.HasValue ? Model.Value.ToString() : "")';
+
+        $("#phone").focus(function () {
+            $(this).mask("(999) 999-9999",
+            { placeholder: "" });
+        });
+        var postStudentUrl = "/api/student/create";
+        var getStudentUrl = "/api/student/edit/{0}";
+        var putStudentUrl = "/api/student/editstudent/{0}";
+
+    </script>
+
+    <script src="~/assets/views/Student/createEditStudent.js"></script>
+}

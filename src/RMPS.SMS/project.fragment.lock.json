@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "TestFramework/1.0.0": {
+      "type": "project",
+      "framework": ".NETStandard,Version=v1.5",
+      "compile": {
+        "bin/Debug/TestFramework.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/TestFramework.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/TestFramework.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

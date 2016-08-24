@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Courses</h2>
+
+<div class="row" >
+    <!-- TASKS -->
+    <div class="col-sm-12">
+        <div class="bg-white p-20 b-bot-2px-gray-light m-t-10">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#courses" role="tab" data-toggle="tab">Courses</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <!-- Users Tab Starts-->
+                        <div class="tab-pane active">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                   
+                                    <hr>
+                                    <div class="btn-group">
+                                        <a asp-area="" asp-controller="Courses" asp-action="CreateEditCourses" class="createEditCourses btn btn-primary" data-fancybox-type="iframe">Add Courses</a>
+                                        <div class="btn btn-alt">
+                                            <i class="fi-plus text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="rmps-courses">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-bordered m-t-10 table-l-a td-ellipsis">
+                                        <thead>
+                                            <tr>
+                                                <th class="input-w-80 table-c-a">Name</th>
+                                                @*<th>No. of Student</th>*@
+                                                <th class="input-w-80 table-c-a">Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: Items(), visible: Items().length > 0 && !loading()">
+                                            <tr>
+                                                <td class="table-c-a">
+                                                    <span data-bind="text: CourseName"></span>
+                                                </td>
+                                                @*<td>
+                                                        <div data-bind="text: NumberOfStudent"></div>
+                                                    </td>*@
+                                                <td class="table-c-a">
+                                                    @*<a asp-area="" asp-controller="Courses" asp-action="CreateEditCourses" class="createEditCourses" data-fancybox-type="iframe">Add Courses</a>*@
+                                                    
+                                                    <a class="createEditCourses" data-fancybox-type="iframe" data-bind="attr: { href: '/editcourses/' + ID() }"><i class="fi-pencil"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="display: none;" data-bind="visible: !loading() && Items().length == 0">
+                                                <td colspan="2" class="table-c-a">
+                                                    No record found!
+                                                </td>
+                                            </tr>
+                                            <tr data-bind="visible: loading">
+                                                <td colspan="2" class="table-c-a">
+                                                    <div class="tb-loader">
+                                                        <img src="~/assets/img/loading.gif" alt="" width="50" height="50" />
+                                                        <div class="m-t-5">Loading...</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        var getCoursesUrl = "/api/course/search?name={0}";
+        $(document).ready(function () {
+            $('.addCourses').fancybox({
+                maxWidth: 1000,
+                maxHeight: 1000,
+                fitToView: false,
+                width: '900px',
+                height: '600px',
+                autoSize: false,
+                closeClick: false,
+                openEffect: 'none',
+                closeEffect: 'none',
+                padding: 0,
+                closeBtn: false,
+            });
+            $('.editCourses').fancybox({
+                maxWidth: 1000,
+                maxHeight: 1000,
+                fitToView: false,
+                width: '900px',
+                height: '600px',
+                autoSize: false,
+                closeClick: false,
+                openEffect: 'none',
+                closeEffect: 'none',
+                padding: 0,
+                closeBtn: false,
+            });
+        });
+
+    </script>
+    <script src="~/assets/views/Courses/Courses.js"></script>
+}

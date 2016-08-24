@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "CreateEditRoomSessions";
+    Layout = "~/Views/Shared/_ChildLayout.cshtml";
+}
+
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Newtonsoft.Json
+@model int?
+<div class="add-role" id="roomsessions">
+    <div class="modal-header">
+        <button type="button" class="close" onclick="parent.jQuery.fancybox.close(); "><span><i class="fi-x-circle m-10 text-large"></i></span></button>
+        @if (Model == null)
+        {
+            <h4 class="modal-title">Add Room Session</h4>
+        }
+        else
+        {
+            <h4 class="modal-title">Update Room Session</h4>
+        }
+    </div>
+    <div class="modal-body">
+        <table class="w-100">
+            <tr>
+                <td class="vAlign text-left">
+                    <label class="control-label m-b-10 m-r-10 p-t-7">Session</label>
+                </td>
+                <td class="vAlign">
+                    <select id="" class="input-w-174 width-200" data-bind="selectize:sessions, value:SessionID, optionsValue: 'ID', optionsText: 'Session',optionsCaption :'Select Session', selectizeOptions: {plugins: ['remove_button']}"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="vAlign text-left">
+                    <label class="control-label m-b-10 m-r-10 p-t-7">Class</label>
+                </td>
+                <td class="vAlign ">
+                    <select id="" class="input-w-174 width-200" data-bind="selectize:ClassRooms, value:ClassID, optionsValue: 'ID', optionsText: 'Name',optionsCaption :'Select Class', selectizeOptions: {plugins: ['remove_button']}"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="vAlign text-left">
+                    <label class="control-label m-b-10 m-r-10 p-t-7">Section</label>
+                </td>
+                <td class="vAlign ">
+                    <select id="" class="input-w-174 width-200" data-bind="selectize:Sections, value:SectionID, optionsValue: 'ID', optionsText: 'Name',optionsCaption :'Select Section', selectizeOptions: {plugins: ['remove_button']}"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="vAlign text-left">
+                    <label class="control-label m-b-10 m-r-10 p-t-7">Course</label>
+                </td>
+                <td class="vAlign ">
+                    <select id="" class="input-w-174 width-200" multiple="multiple" data-bind="selectize:Courses, selectedOptions:CourseID, optionsValue: 'ID', optionsText: 'Name',optionsCaption :'Select Courses', selectizeOptions: {plugins: ['remove_button']}"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        @if (Model == null)
+        {
+            <button type="button" class="btn btn-blue button-w-100" data-bind="ajaxSubmit: post, validationLog: true">Create Room Session</button>
+        }
+        else
+        {
+            <button class="btn btn-blue button-w-100" data-bind="ajaxSubmit: put, validationLog: true"><i class="icon-refresh icon-white"></i>Update Room Session</button>
+        }
+        <button type="button" class="btn btn-default button-style button-w-100" onclick=" parent.jQuery.fancybox.close(); ">Cancel</button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        var sessions = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Sessions));
+        var Courses = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Courses));
+        var ClassRooms = @Html.Raw(JsonConvert.SerializeObject(ViewBag.ClassRooms));
+        var Sections = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Sections));
+        var id = '@(Model.HasValue ? Model.Value.ToString() : "")';
+        var postRoomSessionsUrl = "/api/roomsessions/create";
+        var getRoomSessionsUrl = "/api/roomsessions/edit/{0}";
+        var putRoomSessionsUrl = "/api/roomsessions/update/{0}";
+    </script>
+    <script src="~/assets/views/RoomSessions/createEditRoomSessions.js"></script>
+}

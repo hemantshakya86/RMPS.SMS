@@ -1,0 +1,137 @@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <!-- TASKS -->
+    <div class="col-sm-12">
+        <div class="bg-white p-20 b-bot-2px-gray-light m-t-10">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#onclass-fees" role="tab" data-toggle="tab">On Class Fees</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="onclass-fees">
+
+                        <!-- Users Tab Starts-->
+                        <div class="tab-pane active">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    @*<h3>Student</h3>*@
+                                    <hr>
+                                    <div class="btn-group">
+                                        <a asp-action="CreateEditClassFees" class="createEditOnClassFees btn btn-primary" data-fancybox-type="iframe">Create New</a>
+                                        <div class="btn btn-alt">
+                                            <i class="fi-plus text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-striped table-bordered m-t-10 ">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th>
+                                                    Due Date
+                                                </th>
+                                                <th>
+                                                    Admission Fee
+                                                </th>
+                                                <th>
+                                                    Development Fee
+                                                </th>
+                                                <th>
+                                                    Exam Fee
+                                                </th>
+
+                                                <th>
+                                                    Stationary Fee
+                                                </th>
+                                                <th>
+                                                    Tution Fee
+                                                </th>
+                                                <th>
+                                                    Uniform Fee
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="display: none;" data-bind="foreach: Items(), visible: Items().length > 0, visible: !loading()">
+                                            <tr>
+                                                
+                                                <td>
+                                                    <div data-bind="dateText: DueDate,dateFormat: 'MM/DD/YYYY', isUtc: false"></div>
+                                                </td>
+                                                <td>
+                                                    <div data-bind="text: AdmissionFee"></div>
+                                                </td>
+                                                <td>
+                                                    <div data-bind="text: DevelopmentFee"></div>
+                                                </td>
+                                                <td>
+                                                    <div data-bind="text: ExamFee"></div>
+                                                </td>
+
+                                                <td>
+                                                    <div data-bind="text:  StationaryFee"></div>
+                                                </td>
+                                                <td>
+                                                    <div data-bind="text:  TutionFee"></div>
+                                                </td>
+                                                <td>
+                                                    <div data-bind="text:   UniformFee"></div>
+                                                </td>
+
+                                                <td class="table-c-a">
+                                                    <a class="deleteRoomSessions" data-fancybox-type="iframe" data-bind="attr: { href: '/studentfees/edit/' + ID() }"><i class="fi-x"></i></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr style="display: none;" data-bind="visible: !loading() && Items().length == 0">
+                                                <td colspan="12" class="table-c-a">
+                                                    No record found!
+                                                </td>
+                                            </tr>
+                                            <tr data-bind="visible: loading">
+                                                <td colspan="12" class="table-c-a">
+                                                    <div class="tb-loader">
+                                                        <img src="~/assets/img/loading.gif" alt="" width="50" height="50" />
+                                                        <div class="m-t-5">Loading...</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        var getAllRoomFeesUrl = "/api/studentfees/feesdetial";
+    </script>
+    <script src="~/assets/views/StudentFees/onClassFees.js"></script>
+}
+

@@ -1,0 +1,146 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model int?
+<div class="add-user">
+    <div class="modal-header">
+        <button type="button" class="close" onclick="parent.jQuery.fancybox.close();"><span><i class="fi-x-circle m-10 text-large"></i></span></button>
+        @if (Model == null)
+        {
+            <h4 class="modal-title">Add On Class Fees</h4>
+        }
+        else
+        {
+            <h4 class="modal-title">Update On Class Fees</h4>
+        }
+    </div>
+
+    <div class="modal-body clearfix">
+        <ul class="nav nav-tabs" id="createUsertab" role="tablist">
+            <li id="userDetail" class="active">
+                <a href="#addUser" role="tab" data-toggle="tab">On Class Fees</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="create-user-role">
+            <div class="tab-pane active" id="create-classfees">
+                <div class="clearfix m-t-20 m-b-10">
+                    <div class="pull-left">
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Due Date</label>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" tabindex="1" placeholder="Due Date" data-bind="datePicker: {
+   on: DueDate,
+   dateFormat: 'mm/dd/yy',
+   changeYear: true,
+   changeMonth: true,
+  }, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Admission Fee</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" tabindex="3" placeholder="Due Date" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: AdmissionFee, bTooltip: { placement: 'top' }" maxlength="5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Exam Fee</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input id="phone" type="text" class="form-control m-b-10 input-w-225" tabindex="5" placeholder="ExamFee" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: ExamFee, bTooltip: { placement: 'top' }" maxlength="5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Tution Fee</label>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" placeholder="Tution Fee" tabindex="7" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: TutionFee, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Other Fee1</label>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" placeholder="Development Fee" tabindex="9" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: OtherFee1, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="pull-right clearfix">
+                        <table class="w-100">
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 p-r-5 p-t-7">Development Fee</label><span class="redColor m-r-10">*</span>
+                                </td>
+
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" placeholder="Development Fee" tabindex="2" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: DevelopmentFee, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Stationary Fee</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" placeholder="Stationary Fee" tabindex="4" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: StationaryFee, bTooltip: { placement: 'top' }" maxlength="30">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Uniform Fee</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" tabindex="6" placeholder="Uniform Fee" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: UniformFee, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="vAlign text-left">
+                                    <label class="control-label m-b-10 m-r-10 p-t-7">Other Fee 2</label><span class="redColor m-r-10">*</span>
+                                </td>
+                                <td class="vAlign">
+                                    <input type="text" class="form-control m-b-10 input-w-225" tabindex="8" placeholder="Other Fee 2" data-bind="valueUpdate: ['afterkeydown', 'propertychange', 'input'], value: OtherFee2, bTooltip: { placement: 'top' }">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if (Model == null)
+                    {
+                        <button type="button" tabindex="15" class="btn btn-blue button-w-100" data-bind="ajaxSubmit: post, validationLog: true, activity: true">Create</button>
+                    }
+                    else
+                    {
+                        <button type="button" tabindex="15" class="btn btn-blue button-w-100" data-bind="ajaxSubmit: put, validationLog: true, activity: true"><i class="icon-refresh icon-white"></i>Update</button>
+                    }
+                    <button type="button" class="btn btn-default m-r-10 button-style button-w-100" onclick="parent.jQuery.fancybox.close()" tabindex="16">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        var id = '@(Model.HasValue ? Model.Value.ToString() : "")';
+        var postRoomFeesUrl = "/api/studentfees/feescreate";
+        var getRoomFeesUrl = "/api/studentfees/feesedit/{0}";
+        var putRoomFeesUrl = "/api/studentfees/feesupdate/{0}";
+    </script>
+    <script src="~/assets/views/StudentFees/createEditClassFees.js"></script>
+}
